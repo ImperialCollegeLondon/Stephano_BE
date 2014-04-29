@@ -1,0 +1,29 @@
+{
+    "EARSS" : {
+        "connection" : {
+
+        },
+        "panels": {
+            "west": [{
+                "type" : "googlemaps",
+                "id" : "map",
+                "name" : "Map",
+                "datasource" : "/api/EARSS/geo"
+            }],
+            "east":[{
+                "type" : "PhyloCanvas",
+                "id" : "tree",
+                "name" : "Tree",
+                "datasource" : "/api/EARSS/genome/tree.nwk"
+            }],
+            "south" :[{
+              "type" : "Tabular",
+              "id" :  "meta",
+              "name" : "Metadata Table"
+            },{
+              "type" : "Tabular",
+              "id" :  "epi",
+              "name" : "Change Colours/Labels"
+            }]
+        }
+}

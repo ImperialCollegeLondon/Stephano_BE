@@ -1,0 +1,29 @@
+{
+  "name": "Stephano_BE",
+  "version": "0.0.0",
+  "description": "The Stephano Backend Server",
+  "main": "app.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ImperialCollegeLondon/Stephano_BE.git"
+  },
+  "keywords": [
+    "phylogenetics",
+    "stephano",
+    "bacteria"
+  ],
+  "author": "Chris I Powell (c.powell@imperial.ac.uk)",
+  "license": "AGPL",
+  "bugs": {
+    "url": "https://github.com/ImperialCollegeLondon/Stephano_BE/issues"
+  },
+  "homepage": "https://github.com/ImperialCollegeLondon/Stephano_BE",
+  "dependencies": {
+    "express": "^4.0.0",
+    "passport": "^0.2.0",
+    "mysql": "^2.2.0"
+  }
+}
