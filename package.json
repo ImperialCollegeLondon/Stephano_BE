@@ -22,8 +22,13 @@
   },
   "homepage": "https://github.com/ImperialCollegeLondon/Stephano_BE",
   "dependencies": {
-    "express": "^4.0.0",
-    "passport": "^0.2.0",
-    "mysql": "^2.2.0"
+    "express": ">=4.0.0",
+    "passport": ">=0.2.0",
+    "mysql": ">=2.2.0",
+    "passport-local": "^1.0.0",
+    "passport-http": "^0.2.2"
+  },
+  "devDependencies": {
+    "vows": ">=0.7.0"
   }
 }
