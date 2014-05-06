@@ -1,29 +1,239 @@
 {
-    "EARSS" : {
-        "connection" : {
-
+    "EARSS": {
+        "connection": {
+            "host": "localhost",
+            "user": "EARSS",
+            "password": "8bK9A*$8VZG%66rxq22CWatNDt2uQ2ze",
+            "database": "Stephano_EARSS"
+        },
+        "treeFile": "./EARSS/tree.nwk",
+        "strainTable": {
+            "name": "Strain",
+            "idField": "Isolate",
+            "latitude_field": "Latitude",
+            "longitude_field": "Longitude"
+        },
+        "metaFields": [
+            {
+                "name": "MLST",
+                "label": "MLST Sequence Type"
+            },
+            {
+                "name": "MLVA_MT",
+                "label": "MLVA Type"
+            },
+            {
+                "name": "spa",
+                "label": "<i>spa</i> Type"
+            },
+            {
+                "name": "Country",
+                "label": "Country"
+            },
+            {
+                "name": "city",
+                "label": "City"
+            },
+            {
+                "name": "source",
+                "label": "Source"
+            },
+            {
+                "name": "plh4",
+                "label": "PHL4"
+            },
+            {
+                "name": "ec",
+                "label": "Hospital or Community Acquired"
+            }
+        ],
+        "labelFunctions": {
+            "phage": [
+                {
+                    "type": "label",
+                    "name": "Sa1int",
+                    "label": "Sa1int"
+                },
+                {
+                    "type": "label",
+                    "name": "Sa2int",
+                    "label": "Sa2int"
+                },
+                {
+                    "type": "label",
+                    "name": "Sa3int",
+                    "label": "Sa3int"
+                },
+                {
+                    "type": "label",
+                    "name": "Sa4int",
+                    "label": "Sa4int"
+                },
+                {
+                    "type": "label",
+                    "name": "Sa5int",
+                    "label": "Sa5int"
+                },
+                {
+                    "type": "label",
+                    "name": "Sa6int",
+                    "label": "Sa6int"
+                },
+                {
+                    "type": "label",
+                    "name": "Sa7int",
+                    "label": "Sa7int"
+                },
+                {
+                    "type": "label",
+                    "name": "Sa8int",
+                    "label": "Sa8int"
+                }
+            ],
+            "Resistance phenotype/genotype": [
+                {
+                    "type": "label",
+                    "name": "PCG",
+                    "label": "PCG"
+                },
+                {
+                    "type": "label",
+                    "name": "FOX",
+                    "label": "FOX"
+                },
+                {
+                    "type": "label",
+                    "name": "CIP",
+                    "label": "CIP"
+                },
+                {
+                    "type": "label",
+                    "name": "AMI",
+                    "label": "AMI"
+                },
+                {
+                    "type": "label",
+                    "name": "GEN",
+                    "label": "GEN"
+                },
+                {
+                    "type": "label",
+                    "name": "TOB",
+                    "label": "TOB"
+                },
+                {
+                    "type": "label",
+                    "name": "ERY",
+                    "label": "ERY"
+                },
+                {
+                    "type": "label",
+                    "name": "CLI",
+                    "label": "CLI"
+                },
+                {
+                    "type": "label",
+                    "name": "TET",
+                    "label": "TET"
+                },
+                {
+                    "type": "label",
+                    "name": "TIG",
+                    "label": "TIG"
+                },
+                {
+                    "type": "label",
+                    "name": "FUS",
+                    "label": "FUS"
+                }
+            ],
+            "General": [
+                {
+                    "type": "label",
+                    "name": "MLST",
+                    "label": "MLST"
+                },
+                {
+                    "positive": "0",
+                    "negative": "1",
+                    "type": "binary",
+                    "name": "mrsa",
+                    "label": "MRSA"
+                },
+                {
+                    "type": "label",
+                    "name": "MLVA_MT",
+                    "label": "MLVA_MT"
+                },
+                {
+                    "type": "label",
+                    "name": "spa",
+                    "label": "spa"
+                },
+                {
+                    "type": "label",
+                    "name": "Isolate",
+                    "label": "Isolate"
+                },
+                {
+                    "type": "label",
+                    "name": "Country",
+                    "label": "Country"
+                },
+                {
+                    "type": "label",
+                    "name": "city",
+                    "label": "City"
+                },
+                {
+                    "type": "label",
+                    "name": "source",
+                    "label": "Source"
+                },
+                {
+                    "type": "label",
+                    "name": "plh4",
+                    "label": "PHL"
+                },
+                {
+                    "type": "label",
+                    "name": "ec",
+                    "label": "HosCom"
+                }
+            ]
         },
         "panels": {
-            "west": [{
-                "type" : "googlemaps",
-                "id" : "map",
-                "name" : "Map",
-                "datasource" : "/api/EARSS/geo"
-            }],
-            "east":[{
-                "type" : "PhyloCanvas",
-                "id" : "tree",
-                "name" : "Tree",
-                "datasource" : "/api/EARSS/genome/tree.nwk"
-            }],
-            "south" :[{
-              "type" : "Tabular",
-              "id" :  "meta",
-              "name" : "Metadata Table"
-            },{
-              "type" : "Tabular",
-              "id" :  "epi",
-              "name" : "Change Colours/Labels"
-            }]
+            "west": [
+                {
+                    "type": "googlemaps",
+                    "id": "map",
+                    "name": "Map",
+                    "datasource": "/api/EARSS/geo"
+                }
+            ],
+            "east": [
+                {
+                    "type": "PhyloCanvas",
+                    "id": "tree",
+                    "name": "Tree",
+                    "datasource": "/api/EARSS/tree.nwk"
+                }
+            ],
+            "south": [
+                {
+                    "type": "Tabular",
+                    "id": "meta",
+                    "name": "Metadata Table",
+                    "datasource": "/api/EARSS/meta"
+                },
+                {
+                    "type": "labeler",
+                    "id": "labels",
+                    "name": "Colours and Labels",
+                    "datasource": "/api/EARSS/labels",
+                    "urlbase" : "/api/EARSS/meta/"
+                }
+            ]
         }
+    }
 }

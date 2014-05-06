@@ -14,8 +14,6 @@ User.findOne = function(username, db, callback)
 
 User.findOneCallback = function(err, rows, callback)
 {
-    console.log(callback);
-
     if(err){
         callback(err, null);
         return;
@@ -48,10 +46,5 @@ User.userFromRow = function(row)
     user.isAdmin = row.isAdmin;
     return user;
 }
-
-User.prototype.validPassword = function(password, salt)
-{
-
-};
 
 module.exports = User;

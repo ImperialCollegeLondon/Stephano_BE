@@ -4,21 +4,24 @@ var util = require('util'),
 
 var MySQL = function(config){
     this.config = config;
-
-    //this.connection = driver.createConnection(config);
-    //this.connection.connect(this.connectCallback);
 }
 
 util.inherits(MySQL, EventEmitter);
 
 MySQL.prototype.findObject = function(cls, criteria, callback)
 {
+    var fields = this.getFieldsFromClass(cls),
+        table = cls.name;
+
+    this.select(fields, table, criteria, callback);
+};
+
+MySQL.prototype.select = function(fields, table, criteria, callback)
+{
     var qry = "SELECT ?? FROM ?? WHERE ?",
-        fields = this.getFieldsFromClass(cls),
-        table = cls.name,
         con = driver.createConnection(this.config);
 
-    con.query(qry, [fields, table, criteria], callback);
+    con.query(qry, [fields, table, (criteria || true)], callback);
 };
 
 MySQL.prototype.connectCallback = function(err)
@@ -26,7 +29,7 @@ MySQL.prototype.connectCallback = function(err)
     if(err) {
         this.emit('connect_error', err);
     }
-}
+};
 
 MySQL.prototype.getFieldsFromClass = function(cls)
 {
@@ -42,18 +45,6 @@ MySQL.prototype.getFieldsFromClass = function(cls)
     }
 
     return field_arr;
-}
-
-MySQL.prototype.getCriteriaString = function(obj)
-{
-    var tuples = [];
-
-    for ( var key in obj )
-    {
-        tuples.push(util.format('%s = %s', driver.escapeId(key), driver.escape(obj[key])));
-    }
-
-    return tuples.join(' AND ');
-}
+};
 
 module.exports = MySQL;
