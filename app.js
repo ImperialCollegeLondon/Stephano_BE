@@ -30,14 +30,14 @@ passport.use(new auth.DigestStrategy({ qop : 'auth'},
 ));
 
 app.use(passport.initialize());
-app.use(passport.authenticate('digest', {session:false} ));
+var require_password = passport.authenticate('digest', {session:false} )
 
 app.get('/api/datasets', function(req, res)
 {
     res.send(Object.keys(config));
 });
 
-app.get('/api/:dataset/config', function(req, res)
+app.get('/api/:dataset/config',require_password, function(req, res)
 {
     var dataset = req.params.dataset,
         cfg = config[dataset];
@@ -45,7 +45,7 @@ app.get('/api/:dataset/config', function(req, res)
     res.send(filterConfig(cfg));
 });
 
-app.get('/api/:dataset/tree.nwk', function(req, res)
+app.get('/api/:dataset/tree.nwk',require_password, function(req, res)
 {
     var dataset = req.params.dataset,
         cfg = config[dataset];
@@ -61,7 +61,7 @@ app.get('/api/:dataset/tree.nwk', function(req, res)
     });
 });
 
-app.get('/api/:dataset/meta', function(req, res)
+app.get('/api/:dataset/meta', require_password, function(req, res)
 {
      var dataset = req.params.dataset,
         cfg = config[dataset],
@@ -73,7 +73,7 @@ app.get('/api/:dataset/meta', function(req, res)
     });
 });
 
-app.get('/api/:dataset/meta/:field', function(req, res)
+app.get('/api/:dataset/meta/:field', require_password, function(req, res)
 {
      var dataset = req.params.dataset,
         cfg = config[dataset],
@@ -85,7 +85,7 @@ app.get('/api/:dataset/meta/:field', function(req, res)
     });
 });
 
-app.get('/api/:dataset/geo', function(req, res)
+app.get('/api/:dataset/geo', require_password, function(req, res)
 {
     var dataset = req.params.dataset,
         cfg = config[dataset],
@@ -97,7 +97,7 @@ app.get('/api/:dataset/geo', function(req, res)
     });
 });
 
-app.get('/api/:dataset/labels', function(req, res)
+app.get('/api/:dataset/labels', require_password, function(req, res)
 {
     var dataset = req.params.dataset,
         cfg = config[dataset];
