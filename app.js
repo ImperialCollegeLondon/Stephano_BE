@@ -7,6 +7,7 @@ var express = require('express'),
     Metadata = require('./Interfaces/Metadata.js'),
     app = express();
 
+//Use a local username and password
 passport.use(new auth.DigestStrategy({ qop : 'auth'},
     function(usename, done){
         User.findOne(usename, new DBDriver(config.EARSS.connection), function(err, user){
