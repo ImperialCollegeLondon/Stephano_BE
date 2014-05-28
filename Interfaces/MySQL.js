@@ -4,6 +4,7 @@ var util = require('util'),
 
 var MySQL = function(config){
     this.config = config;
+    this.connection = driver.createConnection(this.config);
 }
 
 util.inherits(MySQL, EventEmitter);
@@ -18,10 +19,8 @@ MySQL.prototype.findObject = function(cls, criteria, callback)
 
 MySQL.prototype.select = function(fields, table, criteria, callback)
 {
-    var qry = "SELECT ?? FROM ?? WHERE ?",
-        con = driver.createConnection(this.config);
-
-    con.query(qry, [fields, table, (criteria || true)], callback);
+    var qry = "SELECT ?? FROM ?? WHERE ?";
+    this.connection.query(qry, [fields, table, (criteria || true)], callback);
 };
 
 MySQL.prototype.connectCallback = function(err)
@@ -46,5 +45,10 @@ MySQL.prototype.getFieldsFromClass = function(cls)
 
     return field_arr;
 };
+
+MySQL.prototype.disconnect = function()
+{
+    this.connection.end();
+}
 
 module.exports = MySQL;

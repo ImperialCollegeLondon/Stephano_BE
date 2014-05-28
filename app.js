@@ -5,12 +5,15 @@ var express = require('express'),
     config = require('./config.json'),
     User = require('./interfaces/User.js'),
     Metadata = require('./Interfaces/Metadata.js'),
-    app = express();
+    app = express(),
+    require_password;
 
 //Use a local username and password
 passport.use(new auth.DigestStrategy({ qop : 'auth'},
     function(usename, done){
-        User.findOne(usename, new DBDriver(config.EARSS.connection), function(err, user){
+        var auth_db =  new DBDriver(config.EARSS.connection)
+
+        User.findOne(usename, auth_db, function(err, user){
             if(err) {
                 return done(err, null);
             }
@@ -21,7 +24,7 @@ passport.use(new auth.DigestStrategy({ qop : 'auth'},
             {
                 return done(null, user, user.authenticator);
             }
-
+            auth_db.disconnect();
         });
     },
     function(params, done)
@@ -31,7 +34,7 @@ passport.use(new auth.DigestStrategy({ qop : 'auth'},
 ));
 
 app.use(passport.initialize());
-var require_password = passport.authenticate('digest', {session:false} )
+require_password = passport.authenticate('digest', {session:false} )
 
 app.get('/api/datasets', function(req, res)
 {
@@ -71,6 +74,7 @@ app.get('/api/:dataset/meta', require_password, function(req, res)
 
     metadata.getTable(function(err,data){
         res.send(data);
+        db.disconnect();
     });
 });
 
@@ -83,6 +87,7 @@ app.get('/api/:dataset/meta/:field', require_password, function(req, res)
 
     metadata.getGroupings(req.params.field, function(err,data){
         res.send(data);
+        db.disconnect();
     });
 });
 
@@ -95,6 +100,7 @@ app.get('/api/:dataset/geo', require_password, function(req, res)
 
     metadata.getGeoJson(function(data){
         res.send(data);
+        db.disconnect();
     });
 });
 
