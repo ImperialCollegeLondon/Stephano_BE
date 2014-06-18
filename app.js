@@ -96,7 +96,7 @@ app.get('/api/:dataset/geo', require_password, function(req, res)
     var dataset = req.params.dataset,
         cfg = config[dataset],
         db = new DBDriver(cfg.connection),
-        metadata=  new Metadata(cfg);
+        metadata = new Metadata(cfg);
 
     metadata.getGeoJson(function(data){
         res.send(data);

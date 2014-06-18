@@ -154,8 +154,8 @@
                     "label": "MLST"
                 },
                 {
-                    "positive": "0",
-                    "negative": "1",
+                    "positive": "1",
+                    "negative": "0",
                     "type": "binary",
                     "name": "mrsa",
                     "label": "MRSA"
@@ -177,6 +177,11 @@
                 },
                 {
                     "type": "label",
+                    "name": "Country",
+                    "label": "Country"
+                },
+                {
+                    "type": "colour",
                     "name": "Country",
                     "label": "Country"
                 },
