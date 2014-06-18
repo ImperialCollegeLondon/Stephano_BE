@@ -154,8 +154,8 @@
                     "label": "MLST"
                 },
                 {
-                    "positive": "1",
-                    "negative": "0",
+                    "positive": "0",
+                    "negative": "1",
                     "type": "binary",
                     "name": "mrsa",
                     "label": "MRSA"

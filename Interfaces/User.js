@@ -20,14 +20,14 @@ User.findOneCallback = function(err, rows, callback)
     }
     else if(!rows || rows.length == 0)
     {
-        err = "User not found";
-        callback(err, null);
+        callback(null, null);
         return;
     }
     else if(rows.length > 1)
     {
         err = "More than one user found";
-        callback(err, null);
+        console.error(err);
+        callback(null, null);
         return;
     }
     else

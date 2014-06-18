@@ -9,16 +9,16 @@ var express = require('express'),
     require_password;
 
 //Use a local username and password
-passport.use(new auth.DigestStrategy({ qop : 'auth'},
+passport.use(new auth.DigestStrategy({ qop : 'auth', realm : 'Stephano'},
     function(usename, done){
         var auth_db =  new DBDriver(config.EARSS.connection)
 
         User.findOne(usename, auth_db, function(err, user){
             if(err) {
-                return done(err, null);
+                return done(null, false);
             }
             else if(!user){
-                return done(null, false, { message : "Username not recognised" });
+                return done(null, false);
             }
             else
             {
