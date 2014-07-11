@@ -1,17 +1,18 @@
 {
-    "EARSS": {
-        "connection": {
-            "host": "localhost",
-            "user": "EARSS",
-            "password": "8bK9A*$8VZG%66rxq22CWatNDt2uQ2ze",
-            "database": "Stephano_EARSS"
-        },
+    "connection": {
+        "host": "localhost",
+        "user": "EARSS",
+        "password": "8bK9A*$8VZG%66rxq22CWatNDt2uQ2ze",
+        "database": "Stephano_V3",
+        "connectionLimit" : 10
+    },"EARSS": {
+
         "treeFile": "./EARSS/tree.nwk",
         "strainTable": {
             "name": "Strain",
             "idField": "Isolate",
-            "latitude_field": "Latitude",
-            "longitude_field": "Longitude"
+            "latitude_field": "latitude",
+            "longitude_field": "longitude"
         },
         "metaFields": [
             {
@@ -19,15 +20,15 @@
                 "label": "MLST Sequence Type"
             },
             {
-                "name": "MLVA_MT",
-                "label": "MLVA Type"
-            },
-            {
                 "name": "spa",
                 "label": "<i>spa</i> Type"
             },
             {
-                "name": "Country",
+                "name": "SCCmec",
+                "label": "<i>SCCmec</i> Type"
+            },
+            {
+                "name": "country",
                 "label": "Country"
             },
             {
@@ -39,11 +40,15 @@
                 "label": "Source"
             },
             {
-                "name": "plh4",
-                "label": "PHL4"
+                "name": "age",
+                "label": "Age"
             },
             {
-                "name": "ec",
+                "name": "sex",
+                "label": "Sex"
+            },
+            {
+                "name": "HosCom",
                 "label": "Hospital or Community Acquired"
             }
         ],

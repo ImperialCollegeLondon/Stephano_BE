@@ -1,0 +1,17 @@
+DROP TABLE IF EXISTS USER;
+CREATE TABLE User(
+	id INT AUTO_INCREMENT,
+	firstName VARCHAR(60),
+	lastName VARCHAR(60),
+	email VARCHAR(100),
+	CONSTRAINT PK_User_id PRIMARY KEY(id)
+);
+
+DROP TABLE IF EXISTS Authenticator;
+CREATE TABLE Authenticator(
+	id INT AUTO_INCREMENT,
+	user_id INT,
+	auththenticator_data VARCHAR(1000),
+	protocol VARCHAR(1000),
+	CONSTRAINT PK_Auth_id PRIMARY KEY(id)
+);
