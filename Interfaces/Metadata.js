@@ -40,11 +40,12 @@ Metadata.prototype.getGroupings = function(field, callback)
 
 
     this.db.select(fields, this.table_name, null, function(err, rows){
+        //check for an error
         if(err){ callback(err, null); return; }
 
         var data = {},
             vals = [];
-            
+
         for( var i = 0; i < rows.length; i++ )
         {
             var val = rows[i][field];

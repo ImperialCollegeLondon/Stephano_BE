@@ -73,6 +73,7 @@ app.get('/api/:dataset/meta', require_password, function(req, res)
         metadata=  new Metadata(cfg);
 
     metadata.getTable(function(err,data){
+        if(err) { res.send('[]'); return; }
         res.send(data);
         db.disconnect();
     });
@@ -86,6 +87,7 @@ app.get('/api/:dataset/meta/:field', require_password, function(req, res)
         metadata=  new Metadata(cfg);
 
     metadata.getGroupings(req.params.field, function(err,data){
+        if(err) { res.send('[]'); return; }
         res.send(data);
         db.disconnect();
     });
