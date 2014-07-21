@@ -65,6 +65,7 @@ app.get('/api/:dataset/tree.nwk',require_password, function(req, res)
     });
 });
 
+//Serve metadata table
 app.get('/api/:dataset/meta', require_password, function(req, res)
 {
      var dataset = req.params.dataset,
