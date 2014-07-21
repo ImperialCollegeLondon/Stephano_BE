@@ -4,7 +4,7 @@ var util = require('util'),
 
 var MySQL = function(config){
     this.config = config;
-    this.connection = driver.createConnection(this.config);
+    this.connection = driver.createPool(this.config);
 }
 
 util.inherits(MySQL, EventEmitter);
@@ -48,7 +48,7 @@ MySQL.prototype.getFieldsFromClass = function(cls)
 
 MySQL.prototype.disconnect = function()
 {
-    this.connection.end();
+    //this.connection.end();
 }
 
 module.exports = MySQL;
