@@ -44,6 +44,7 @@ Metadata.prototype.getGroupings = function(field, callback)
 
         var data = {},
             vals = [];
+            
         for( var i = 0; i < rows.length; i++ )
         {
             var val = rows[i][field];
