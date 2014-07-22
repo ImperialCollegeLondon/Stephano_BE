@@ -74,6 +74,10 @@ User.fromRow = function(row)
     return user;
 };
 
+User.prototype.getPassword = function(protocol, encryption_algorithm, salt)
+{
+}
+
 function Authenticator () {
     this.id = null;
     this.user_id = null;
@@ -91,10 +95,20 @@ Authenticator.fromRow = function(row)
     return auth;
 };
 
-Authenticator.prototype.check = function(auth_data)
+Authenticator.prototype.getPassword = function(encryption_algorithm, salt)
 {
-
+    var decipher = crypto.creatDecipher(encryption_algorithm, salt);
+    decipher.update(this.authenticator_data, 'base64', 'utf8');
+    return decipher.final('utf8');
 }
+
+Authenticator.prototype.setPassword = function(password, encryption_algorithm, salt)
+{
+    var cipher = crypto.createCipher(encryption_algorithm, salt);
+    cipher.update(this.authenticator_data, 'base64', 'utf8');
+    this.password = cipher.final('utf8');
+}
+
 
 Authenticator.prototype.add = function(db)
 {

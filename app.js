@@ -22,7 +22,7 @@ passport.use(new auth.DigestStrategy({ qop : 'auth', realm : 'Stephano'},
             }
             else
             {
-                return done(null, user, user.authenticator);
+                return done(null, user, user.getAuthenticator('local'));
             }
             auth_db.disconnect();
         });
