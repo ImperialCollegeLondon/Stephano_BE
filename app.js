@@ -1,19 +1,20 @@
 var express = require('express'),
     passport = require('passport'),
     auth = require('passport-http'),
-    DBDriver = require('./Interfaces/MySQL.js'),
+    DBPool = require('./Interfaces/MySQL.js'),
     config = require('./config.json'),
     User = require('./interfaces/User.js'),
     Metadata = require('./Interfaces/Metadata.js'),
     app = express(),
+    db = new DBPool(config.EARSS.connection),
     require_password;
 
 //Use a local username and password
 passport.use(new auth.DigestStrategy({ qop : 'auth', realm : 'Stephano'},
     function(usename, done){
-        var auth_db =  new DBDriver(config.EARSS.connection)
+        //var auth_db =  new DBDriver(config.EARSS.connection)
 
-        User.findOne(usename, auth_db, function(err, user){
+        User.findOne(usename, db, function(err, user){
             if(err) {
                 return done(null, false);
             }
@@ -70,7 +71,7 @@ app.get('/api/:dataset/meta', require_password, function(req, res)
 {
      var dataset = req.params.dataset,
         cfg = config[dataset],
-        db = new DBDriver(cfg.connection),
+        //db = new DBDriver(cfg.connection),
         metadata=  new Metadata(cfg);
 
     metadata.getTable(function(err,data){
@@ -84,7 +85,7 @@ app.get('/api/:dataset/meta/:field', require_password, function(req, res)
 {
      var dataset = req.params.dataset,
         cfg = config[dataset],
-        db = new DBDriver(cfg.connection),
+        //db = new DBDriver(cfg.connection),
         metadata=  new Metadata(cfg);
 
     metadata.getGroupings(req.params.field, function(err,data){
@@ -98,7 +99,7 @@ app.get('/api/:dataset/geo', require_password, function(req, res)
 {
     var dataset = req.params.dataset,
         cfg = config[dataset],
-        db = new DBDriver(cfg.connection),
+        //db = new DBDriver(cfg.connection),
         metadata = new Metadata(cfg);
 
     metadata.getGeoJson(function(data){
