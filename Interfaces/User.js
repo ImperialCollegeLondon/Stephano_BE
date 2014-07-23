@@ -97,7 +97,7 @@ Authenticator.fromRow = function(row)
 
 Authenticator.prototype.getPassword = function(encryption_algorithm, salt)
 {
-    var decipher = crypto.creatDecipher(encryption_algorithm, salt);
+    var decipher = crypto.createDecipher(encryption_algorithm, salt);
     decipher.update(this.authenticator_data, 'base64', 'utf8');
     return decipher.final('utf8');
 }
@@ -105,8 +105,8 @@ Authenticator.prototype.getPassword = function(encryption_algorithm, salt)
 Authenticator.prototype.setPassword = function(password, encryption_algorithm, salt)
 {
     var cipher = crypto.createCipher(encryption_algorithm, salt);
-    cipher.update(this.authenticator_data, 'base64', 'utf8');
-    this.password = cipher.final('utf8');
+    cipher.update(password, 'utf8', 'base64');
+    this.authenticator_data = cipher.final('base64');
 }
 
 

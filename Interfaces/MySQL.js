@@ -20,7 +20,9 @@ MySQL.prototype.deleteObject = function(cls, criteria, callback)
     var fields = this.getFieldsFromClass(cls),
         table = cls.name;
 
-    this.delete(table, criteria, callback);
+    this.delete(table, criteria, function(res, err){
+        callback(err);
+    });
 };
 
 MySQL.prototype.addObject = function(cls, object, callback)
