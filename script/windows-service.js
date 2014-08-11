@@ -1,5 +1,6 @@
 var Service = require('node-windows').Service;
-
+var EventLogger = require('node-windows').EventLogger;
+var log = new EventLogger('Stephano');
 // Create a new service object
 var svc = new Service({
   name:'Stephano',
@@ -11,6 +12,10 @@ var svc = new Service({
 // process is available as a service.
 svc.on('install',function(){
   svc.start();
+});
+
+svc.on('error', function(err){
+	log.error(err);
 });
 
 svc.install();
