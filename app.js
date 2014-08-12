@@ -42,7 +42,7 @@ app.get('/api/datasets', function(req, res)
     res.send(Object.keys(config));
 });
 
-app.get('/api/:dataset/config',require_password, function(req, res)
+app.get('/api/:dataset/config', /*require_password,*/ function(req, res)
 {
     var dataset = req.params.dataset,
         cfg = config[dataset];
@@ -50,7 +50,7 @@ app.get('/api/:dataset/config',require_password, function(req, res)
     res.send(filterConfig(cfg));
 });
 
-app.get('/api/:dataset/tree.nwk',require_password, function(req, res)
+app.get('/api/:dataset/tree.nwk',/*require_password,*/ function(req, res)
 {
     var dataset = req.params.dataset,
         cfg = config[dataset];
@@ -67,7 +67,7 @@ app.get('/api/:dataset/tree.nwk',require_password, function(req, res)
 });
 
 //Serve metadata table
-app.get('/api/:dataset/meta', require_password, function(req, res)
+app.get('/api/:dataset/meta', /*require_password,*/ function(req, res)
 {
      var dataset = req.params.dataset,
         cfg = config[dataset],
@@ -81,7 +81,7 @@ app.get('/api/:dataset/meta', require_password, function(req, res)
     });
 });
 
-app.get('/api/:dataset/meta/:field', require_password, function(req, res)
+app.get('/api/:dataset/meta/:field', /*require_password,*/ function(req, res)
 {
      var dataset = req.params.dataset,
         cfg = config[dataset],
@@ -95,7 +95,7 @@ app.get('/api/:dataset/meta/:field', require_password, function(req, res)
     });
 });
 
-app.get('/api/:dataset/geo', require_password, function(req, res)
+app.get('/api/:dataset/geo', /*require_password,*/ function(req, res)
 {
     var dataset = req.params.dataset,
         cfg = config[dataset],
@@ -108,7 +108,7 @@ app.get('/api/:dataset/geo', require_password, function(req, res)
     });
 });
 
-app.get('/api/:dataset/labels', require_password, function(req, res)
+app.get('/api/:dataset/labels', /*require_password,*/ function(req, res)
 {
     var dataset = req.params.dataset,
         cfg = config[dataset];
@@ -122,6 +122,17 @@ app.get('/api/:dataset/labels', require_password, function(req, res)
 
 function filterConfig(cfg){
     var new_cfg = cfg.panels;
+
+    for( var panel in new_cfg )
+    {
+        for ( var plugin in new_cfg[panel] )
+        {
+            if( new_cfg[panel][plugin].type == 'Tabular' )
+            {
+                new_cfg[panel][plugin].fields = cfg.metaFields;
+            }
+        }
+    }
 
     return new_cfg;
 }
