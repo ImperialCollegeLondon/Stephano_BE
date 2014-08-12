@@ -37,6 +37,27 @@ passport.use(new auth.DigestStrategy({ qop : 'auth', realm : 'Stephano'},
 app.use(passport.initialize());
 require_password = passport.authenticate('digest', {session:false} )
 
+function compate_isolate_ids(a, b)
+{
+    var key_a = Number(a.Isolate.substr(0, a.Isolate.indexOf('_')));
+    var key_b = Number(b.Isolate.substr(0, b.Isolate.indexOf('_')));
+
+    console.log(key_a, key_b);
+
+    if(key_a < key_b)
+    {
+        return -1;
+    }
+    else if(key_a > key_b)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+
 app.get('/api/datasets', function(req, res)
 {
     res.send(Object.keys(config));
@@ -75,6 +96,9 @@ app.get('/api/:dataset/meta', /*require_password,*/ function(req, res)
         metadata=  new Metadata(cfg);
 
     metadata.getTable(function(err,data){
+
+        data.sort(compate_isolate_ids);
+
         if(err) { res.send('[]'); return; }
         res.send(data);
         db.disconnect();
